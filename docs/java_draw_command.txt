@@ -1,0 +1,1 @@
+java -jar "C:\Users\DELL\.vscode\extensions\jebbs.plantuml-2.18.1\plantuml.jar" -tsvg TechMart_Architecture_Diagram.puml
