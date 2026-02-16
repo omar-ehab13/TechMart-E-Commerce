@@ -77,4 +77,9 @@ public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
         return await Context.Set<T>().AnyAsync(e => e.Id == id, cancellationToken);
     }
+
+    public IQueryable<T> GetAllQueryable()
+    {
+        return Context.Set<T>().AsQueryable();
+    }
 }

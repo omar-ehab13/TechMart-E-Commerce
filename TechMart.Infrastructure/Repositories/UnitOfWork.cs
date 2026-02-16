@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore.Storage;
+using TechMart.Domain.Entities.Base;
 using TechMart.Domain.Interfaces;
 using TechMart.Infrastructure.Data;
 
@@ -9,9 +10,25 @@ public class UnitOfWork : IUnitOfWork
     private readonly TechMartDbContext _context;
     private IDbContextTransaction? _transaction;
 
+    private readonly Dictionary<Type, object> _repositories = new();
+
     public UnitOfWork(TechMartDbContext context)
     {
         _context = context;
+    }
+
+    public IRepository<T> GetRepository<T>() where T : BaseEntity
+    {
+        var type = typeof(T);
+
+        if (_repositories.ContainsKey(type))
+            return (IRepository<T>)_repositories[type];
+
+        var repository = new GenericRepository<T>(_context);
+
+        _repositories[type] = repository;
+
+        return repository;
     }
 
     public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

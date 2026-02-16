@@ -14,6 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TechMart.Application\TechMart.Application.csproj" />
+    <ProjectReference Include="..\TechMart.Domain\TechMart.Domain.csproj" />
     <ProjectReference Include="..\TechMart.Infrastructure\TechMart.Infrastructure.csproj" />
   </ItemGroup>
 
